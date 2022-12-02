@@ -1,0 +1,14 @@
+{
+    "name": "kvr-script",
+    "description": "simple script to find available kvr times",
+    "authors": "gosticks",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "playwright": "^1.12.2",
+        "node-fetch": "2.6.1"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
+}
