@@ -5,7 +5,7 @@ Well you could check the website every hour and hope that someone has canceled t
 
 ## How to use
 ### Configuration
-Before searching for appointments you need to configure which type of appointment you are looking for. This is done in the `config.yaml`. You can simple copy/rename the `config-example.yaml` and adapt it for your needs
+Before searching for appointments you need to configure which type of appointment you are looking for. This is done in the `config.yaml`.
 
 Additionally, you need to configure a Telegram bot that notifies you about the latest search results. First, you need to create a bot. This is done by sending the `BotFather` a message containing the command `/newbot`. It will then prompt you to enter a name and username for the bot. After that you will receive a token which you have to set in the `config.yaml`.
 
@@ -30,4 +30,4 @@ node index.js
 ```
 
 ### Known issues
-It has recently been discovered that the dialogue is sometimes guarded by a (fairly simple) captcha. For now the program will simply skip the appointment search and wait for the configured interval.
+It has recently been discovered that the dialogue is sometimes guarded by a (fairly simple) captcha. This seems to be dependending on the concrete endpoint with only the "Bürgerbüro" being affected so far. For now the program will simply skip the appointment search and wait for the configured interval.
