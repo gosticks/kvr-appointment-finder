@@ -1,59 +1,68 @@
-const { chromium } = require('playwright');
-const fetch = require('node-fetch');
+const { chromium } = require("playwright");
+const fetch = require("node-fetch");
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "XXXXXXXXXX:AAF7xpn1zMhOjdNd6x-XXXXXXXXXXX"
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "XXXXXXXXX"
-const KVR_ID = process.env.KVR_ID ?? 1000102
-const headless = (process.env.HEADLESS ?? true) === true
-const kvrUrl = 'https://terminvereinbarung.muenchen.de/sta/termin/index.php?cts=' + KVR_ID;
+const TELEGRAM_BOT_TOKEN =
+  process.env.TELEGRAM_BOT_TOKEN ?? "XXXXXXXXXX:XXXXXXXXXXXXXXXXXX-XXXXXXXXXXX";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "XXXXXXXXX";
+const KVR_ID = process.env.KVR_ID ?? 1000102;
+const headless = (process.env.HEADLESS ?? true) === true;
+const kvrUrl =
+  "https://terminvereinbarung.muenchen.de/sta/termin/index.php?cts=" + KVR_ID;
 
 // either overwrite case type here or use KVR_CASE_TYPE_VARIABLE
-const personCountSelector = `select[name="CASETYPES[${process.env.KVT_CASE_TYPE ?? "Kirchenaustritt erklären"}]"]`;
-const interval = 1000 * 60 * 30
+const personCountSelector = `select[name="CASETYPES[${
+  process.env.KVT_CASE_TYPE ?? "Kirchenaustritt erklären"
+}]"]`;
+const interval = 1000 * 60 * 30;
 
 const sendMsg = async (msg, gif, fetchOptions = {}) => {
-    fetchOptions.timeout = fetchOptions.timeout || 3000;
+  fetchOptions.timeout = fetchOptions.timeout || 3000;
 
-    let url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/`;
+  let url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/`;
 
-    if (gif) {
-        url += `sendvideo?chat_id=${TELEGRAM_CHAT_ID}&caption=${encodeURIComponent(msg)}&video=${encodeURIComponent(gif)}`
-    } else {
-        url += `sendmessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(msg)}`
-    }
+  if (gif) {
+    url += `sendvideo?chat_id=${TELEGRAM_CHAT_ID}&caption=${encodeURIComponent(
+      msg
+    )}&video=${encodeURIComponent(gif)}`;
+  } else {
+    url += `sendmessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(
+      msg
+    )}`;
+  }
 
-    try {
-        let response = await (await fetch(url, fetchOptions)).json();
-        return response;
-      } catch (e) {
-        console.error(new Date().toLocaleString(), e.message);
-        return false;
-      }
-}
+  try {
+    let response = await (await fetch(url, fetchOptions)).json();
+    return response;
+  } catch (e) {
+    console.error(new Date().toLocaleString(), e.message);
+    return false;
+  }
+};
 
 const nothingFound = async () => {
-  await sendMsg('Nothing new yet \n' + Date().toLocaleString(), "https://tenor.com/2pw1.gif")
-  console.log("[log] no new entry found for date " + Date().toLocaleString())
-}
+  await sendMsg(
+    "Nothing new yet \n" + Date().toLocaleString(),
+    "https://tenor.com/2pw1.gif"
+  );
+  console.log("[log] no new entry found for date " + Date().toLocaleString());
+};
 
 const createFindFreeDates = (page) => async () => {
-    
-  await page.goto(kvrUrl)
-    console.log("[log] fetching current state")
-    await page.waitForSelector(personCountSelector)
-    await page.selectOption(`${personCountSelector}`, "1")
-    // console.debug("found person selector")
-    await page.waitForSelector(".WEB_APPOINT_FORWARDBUTTON")
-    await page.click(".WEB_APPOINT_FORWARDBUTTON")
-    
-    // wait for updated page to load
-    await page.waitForSelector(".nat_calendar td.nat_calendar")
-    const monthEntries = await page.$$("td.nat_calendar")
-    
+  await page.goto(kvrUrl);
+  console.log("[log] fetching current state");
+  await page.waitForSelector(personCountSelector);
+  await page.selectOption(`${personCountSelector}`, "1");
+  // console.debug("found person selector")
+  await page.waitForSelector(".WEB_APPOINT_FORWARDBUTTON");
+  await page.click(".WEB_APPOINT_FORWARDBUTTON");
 
-    console.log("[log] data loaded")
-    // data has type
-    /*
+  // wait for updated page to load
+  await page.waitForSelector(".nat_calendar td.nat_calendar");
+  const monthEntries = await page.$$("td.nat_calendar");
+
+  console.log("[log] data loaded");
+  // data has type
+  /*
     {
       'Wartezone Kirchenaustritte': {
         caption: 'Standesamt Ruppertstrasse',
@@ -77,44 +86,41 @@ const createFindFreeDates = (page) => async () => {
       }
     }
     */
-    const data = JSON.parse(await page.evaluate(() => jsonAppoints) ?? 
-    "{}")
-    if (Object.entries(data).length === 0) {
-      await nothingFound()
-      return
-    }
-    //console.log(data)
+  const data = JSON.parse((await page.evaluate(() => jsonAppoints)) ?? "{}");
+  if (Object.entries(data).length === 0) {
+    await nothingFound();
+    return;
+  }
+  //console.log(data)
 
-    // select appointment data
-    const appointments =  Object.entries(data)[0][1].appoints
+  // select appointment data
+  const appointments = Object.entries(data)[0][1].appoints;
 
+  // all entries as a list of [[available, data]]
+  let nonEmptyDays = Object.entries(appointments).filter(
+    ([key, value]) => value.length !== 0
+  );
 
-    // all entries as a list of [[available, data]]
-    let nonEmptyDays = Object.entries(appointments).filter(([key, value]) => value.length !== 0 )
+  if (nonEmptyDays.length > 0) {
+    const appointDisplayList = nonEmptyDays.reduce((acc, cur) => {
+      return `${acc}\n${cur[0]} at ${cur[1].join(",")}`;
+    }, "");
 
-      
-    if (nonEmptyDays.length > 0) {
-      const appointDisplayList = nonEmptyDays.reduce((acc, cur) => {
-        return `${acc}\n${cur[0]} at ${cur[1].join(",")}`
-      }, "")
-
-      console.log("[log] found entries " + appointDisplayList)
-      await sendMsg('Found available dates: ' + appointDisplayList);
-    } else {
-      await nothingFound()
-    }
-}
+    console.log("[log] found entries " + appointDisplayList);
+    await sendMsg("Found available dates: " + appointDisplayList);
+  } else {
+    await nothingFound();
+  }
+};
 
 (async () => {
-  console.log("[log] starting playwright with chromium backend")
-  const browser = await chromium.launch({ headless })
-  const context = await browser.newContext({
-  })
-  const page = await context.newPage()
-  console.log("[log] browser running...")
-  const findFreeDates = createFindFreeDates(page)
-  findFreeDates()
-  console.log("[log] started periodic check every " + interval + " seconds")
-  setInterval(findFreeDates, interval)
-
-})()
+  console.log("[log] starting playwright with chromium backend");
+  const browser = await chromium.launch({ headless });
+  const context = await browser.newContext({});
+  const page = await context.newPage();
+  console.log("[log] browser running...");
+  const findFreeDates = createFindFreeDates(page);
+  findFreeDates();
+  console.log("[log] started periodic check every " + interval + " seconds");
+  setInterval(findFreeDates, interval);
+})();
