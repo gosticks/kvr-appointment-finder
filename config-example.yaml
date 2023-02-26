@@ -6,9 +6,9 @@ TelegramChatID: "xxxxxxxxx"
 # the KVR, a minimum interval of 10 minutes is required.
 Interval: 1800000 # 1000 * 60 * 30 ms = 30 min
 # Whether to start PlayWrighter in headless mode - mainly for debugging and presentation
-Headless: false 
+Headless: true 
 # Kind of appointment. See list below for possible values
-AppointmentType: "Antrag Personalausweis"
+AppointmentType: "Kirchenaustritt erklären"
 # Name of the citizens office (Bürgerbüro) - only needed when an appointment in a Bürgerbüro is searched for
 CitizensOffice: "Pasing"
 

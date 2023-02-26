@@ -17,8 +17,9 @@ You can choose to either run the application in a docker container or directly o
 #### Docker
 ```bash
 docker build -t kvr .
-docker run -it kvr
+docker run -v ./config.yaml:/app/config.yaml -it kvr
 ```
+
 Note that non-Headless mode requires further configuration of the Dockerfile and your system.
 
 #### System
