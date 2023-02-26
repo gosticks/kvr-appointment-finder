@@ -5,7 +5,7 @@ Well you could check the website every hour and hope that someone has canceled t
 
 ## How to use
 ### Configuration
-Before searching for appointments you need to configure which type of appointment you are looking for. This is done in the `config.yaml`.
+Before searching for appointments you need to configure which type of appointment you are looking for. This is done in the `config.yaml`. You can simple copy/rename the `config-example.yaml` and adapt it for your needs
 
 Additionally, you need to configure a Telegram bot that notifies you about the latest search results. First, you need to create a bot. This is done by sending the `BotFather` a message containing the command `/newbot`. It will then prompt you to enter a name and username for the bot. After that you will receive a token which you have to set in the `config.yaml`.
 
@@ -15,9 +15,10 @@ Secondly, you need your personal ChatID. This can be received by the `IDBot` fir
 You can choose to either run the application in a docker container or directly on your system
 
 #### Docker
+Simply replace `your-config.yaml` with the name of your configuration file and run the commands below. 
 ```bash
 docker build -t kvr .
-docker run -v ./config.yaml:/app/config.yaml -it kvr
+docker run -v ./your-config.yaml:/app/config.yaml -it kvr
 ```
 
 Note that non-Headless mode requires further configuration of the Dockerfile and your system.
