@@ -1,0 +1,210 @@
+# TelegramBotToken is the token of the bot you've created
+TelegramBotToken: "xxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# TelegramChatID is your personal ChatID
+TelegramChatID: "xxxxxxxxx"
+# Interval in which the appoints will be checked. Because we do not want to DDoS
+# the KVR, a minimum interval of 10 minutes is required.
+Interval: 1800000 # 1000 * 60 * 30 ms = 30 min
+# Whether to start PlayWrighter in headless mode - mainly for debugging and presentation
+Headless: false 
+# Kind of appointment. See list below for possible values
+AppointmentType: "Antrag Personalausweis"
+# Name of the citizens office (Bürgerbüro) - only needed when an appointment in a Bürgerbüro is searched for
+CitizensOffice: "Pasing"
+
+# Possible appointment types:
+# ~ Standesamt
+# ~~ Standesamt
+# "Kirchenaustritt erklären"
+# "Beratungsgespräch Eheanmeldeverfahren"
+# "Eheanmeldung ohne Auslandsbezug"
+# "Eheanmeldung mit Auslandsbezug"
+# "Erklärung Reihenfolge Vornamen"
+# "Erklärung 3. Geschlecht"
+
+# ~~ Standesamt Pasing
+# "Kirchenaustritt erklären (Standesamt Pasing)"
+# "Beratungsgespräch Eheanmeldeverfahren (Standesamt Pasing)"
+# "Eheanmeldung ohne Auslandsbezug (Standesamt Pasing)"
+# "Eheanmeldung mit Auslandsbezug (Standesamt Pasing)"
+# "Erklärung Reihenfolge Vornamen (Standesamt Pasing)"
+# "Erklärung 3. Geschlecht (Standesamt Pasing)"
+
+
+# ~ Führerscheinstelle
+# ~~ Internationaler Führerschein
+# "Internationalen Führerschein mit vorherigem Tausch in Kartenführerschein beantragen"
+# "Internationaler Führerschein bei Besitz eines Kartenführerscheins"
+
+# ~~ Umschreibung eines ausländischen Führerscheins 
+# "Umschreibung eines ausländischen Führerscheins (kein EU/EWR-Führerschein) beantragen"
+
+# ~~ Führerschein zur Fahrgastbeförderung 
+# "Ersatz Personenbeförderungsschein wegen Verlust / Diebstahl"
+
+# ~~ Umschreibung Dienstführerschein 
+# "Dienstführerschein umschreiben"
+
+# ~~ Abholung Führerschein 
+# "Abholen eines internationalen Führerscheins bei Besitz eines Kartenführerscheins"
+# "Abholung eines Führerscheines"
+# "Abholung eines Personenbeförderungsscheines"
+
+
+# ~ Bürgerbüro
+# ~~ Meldeangelegenheiten
+# "An- oder Ummeldung - Einzelperson"
+# "An- oder Ummeldung - Einzelperson mit eigenen Fahrzeugen"
+# "An- oder Ummeldung - Familie"
+# "An- oder Ummeldung - Familie mit eigenen Fahrzeugen"
+# "Meldebescheinigung"
+# "Haushaltsbescheinigung"
+# "Familienstandsänderung/ Namensänderung"
+
+# ~~ Ausweisdokumente
+# "Antrag Personalausweis"
+# "Antrag Reisepass/Expressreisepass"
+# "Antrag vorläufiger Reisepass"
+# "Antrag oder Verlängerung/Aktualisierung Kinderreisepass"
+# "Ausweisdokumente - Familie (Minderjährige und deren gesetzlicheVertreter)"
+# "eID-Karte beantragen (EU/EWR)"
+# "Nachträgliche Anschriftenänderung Personalausweis/Reisepass/eAT"
+# "Nachträgliches Einschalten eID / Nachträgliche Änderung PIN"
+# "Widerruf der Verlust- oder Diebstahlanzeige von Personalausweis oder Reisepass"
+# "Verlust- oder Diebstahlanzeige von Personalausweis"
+# "Verlust- oder Diebstahlanzeige von Reisepass"
+
+# ~~ Abholung Ausweisdokumente (Personalausweise, Reisepässe, eID-Karten) 
+# "Personalausweis, Reisepass oder eID-Karte abholen"
+
+# ~~ Bundeszentralregisterauskunft (Auskunft Gewerbezentralregister) 
+# "Führungszeugnis beantragen"
+# "Gewerbezentralregisterauskunft beantragen – natürliche Person"
+# "Gewerbezentralregisterauskunft beantragen – juristische Person"
+
+# ~~ Beglaubigungen
+# "Bis zu 5 Beglaubigungen Unterschrift"
+# "Bis zu 5 Beglaubigungen Dokument"
+# "Bis zu 20 Beglaubigungen"
+
+# ~~ Zulassungsangelegenheiten
+# "Fahrzeug wieder anmelden [Zulassungsangelegenheiten]"
+# "Fahrzeug außer Betrieb setzen"
+# "Adressänderung in Fahrzeugpapiere eintragen lassen [Zulassungsangelegenheiten]"
+# "Namensänderung in Fahrzeugpapiere eintragen lassen"
+
+
+# ~ Versicherungsamt
+# ~~ Rentenauskunft
+# "Auskunft Rente"
+# "Auskunft Hinterbliebenenrente"
+# "Rentenberechnung"
+# "Widerspruch"
+# "Wartezeitauskunft"
+# "Beiträge"
+# "Sonstiges RV"
+
+# ~~ Auskunft KW, UV, RV
+# "Auskunft KVdR"
+# "Familienversicherung"
+# "KV für Selbständige"
+# "KV für Studenten"
+# "Personen ohne KV"
+# "Krankengeld"
+# "Beitragsrecht"
+# "Sonstiges KV"
+# "Auskunft PV"
+# "Soziale Absicherung von Pflegepersonen"
+# "Schwerbehindertenausweis"
+
+# ~~ Rentenanträge
+# "Kontenklärung"
+# "Altersrente"
+# "Rente wegen teilweiser oder voller Erwerbsminderung"
+# "Hinterbliebenenrente"
+# "Antrag auf Beitragserstattung"
+# "Antrag aufmedizinische Rehabilitation"
+# "Lebensbescheinigung"
+
+
+# ~ Amt für Ausbildungsförderung
+# ~~ Dienleistungen des AfA
+# "Allgemeine Beratung"
+# "Antrag abgeben"
+# "Unterlagen nachreichen"
+
+
+# ~ KFZ-Zulassungsstelle
+# ~~ Zulassung
+# "Fabrikneues Fahrzeug anmelden (mit deutschen Fahrzeugpapieren oder CoC) [Zulassung]"
+# "Fahrzeug umschreiben innerhalb Münchens"
+# "Fahrzeug umschreiben von außerhalb nach München [Zulassung]"
+# "Fahrzeug wieder anmelden [Zulassung]"
+# "Vorabzuteilung eines Kennzeichens (z.B. für Fahrten zur Prüforganisation)"
+
+# ~~ Leasing/Finanzierung (Fahrzeugbrief (ZBII) liegt Ihnen nicht vor) 
+# "Fabrikneues Fahrzeug anmelden (mit deutschen Fahrzeugpapieren oder CoC) [Leasing/Finanzierung]"
+# "Fahrzeug umschreiben innerhalb Münchens [Leasing/Finanzierung]"
+# "Fahrzeug umschreiben von außerhalb nach München [Leasing/Finanzierung]"
+# "Fahrzeug wieder anmelden [Leasing/Finanzierung]"
+# "Adressänderung in Fahrzeugpapiere eintragen lassen [Leasing/Finanzierung]"
+# "Namensänderung in Fahrzeugpapiere eintragen lassen [Leasing/Finanzierung]"
+# "Technische Änderung in Fahrzeugpapiere eintragen lassen [Leasing/Finanzierung]"
+# "Saisonkennzeichen beantragen [Leasing/Finanzierung]"
+# "Wechselkennzeichen [Leasing/Finanzierung]"
+# "Verlust oder Diebstahl der Zulassungsbescheinigung Teil I [Leasing/Finanzierung]"
+# "Verlust oder Diebstahl der Kennzeichenschilder [Leasing/Finanzierung]"
+
+# ~~ Import
+# "Aus dem Ausland eingeführtes fabrikneues Fahrzeug anmelden"
+# "Aus dem Ausland eingeführtes gebrauchtes Fahrzeug anmelden"
+# "Kurzzeitkennzeichen für Fahrzeuge mit ausländischen"
+# "Vorabzuteilung eines Kennzeichens (z.B. für Fahrten zur Prüforganisation"
+# "Zulassung eines selbstgebauten Neufahrzeuges"
+
+# ~~ Änderung der Fahrzeugpapiere
+# "Adressänderung in Fahrzeugpapiere eintragen lassen [Änderung der Fahrzeugpapiere]"
+# "Namensänderung in Fahrzeugpapiere eintragen lassen [Änderung der Fahrzeugpapiere]"
+# "Technische Änderung in Fahrzeugpapiere eintragen lassen [Änderung der Fahrzeugpapiere]"
+
+# ~~ Fahrzeugregister
+# "Auskunft aus dem Fahrzeugregister beantragen"
+# "Halter- und Datenbestätigungen für ein Kraftfahrzeug beantragen"
+
+# ~~ Besondere Kennzeichen
+# "Saisonkennzeichen beantragen [Besondere Kennzeichen]"
+# "Kurzzeitkennzeichen beantragen"
+# "Wechselkennzeichen [Besondere Kennzeichen]"
+# "Historisches Kennzeichen für Oldtimer beantragen"
+# "Rotes Dauerkennzeichen für Oldtimer beantragen -"
+# "Rote Dauerkennzeichen für Handel und Handwerk -"
+# "Ausfuhrkennzeichen"
+
+# ~~ Verlust oder Diebstahl
+# "Verlust oder Diebstahl der Zulassungsbescheinigung Teil I [Verlust oder Diebstahl]"
+# "Verlust oder Diebstahl der Zulassungsbescheinigung Teil II [Verlust oder Diebstahl]"
+# "Verlust oder Diebstahl der Kennzeichenschilder [Verlust oder Diebstahl]"
+
+# ~~ Fahrzeug abmelden
+# "Abmeldung"
+# "Abmeldung mit Verlust oder Diebstahl der Zulassungsbescheinigung Teil I"
+# "Abmeldung mit Verlust oder Diebstahl der Kennzeichen"
+
+# ~~ Versicherungen
+# "Bearbeitung von Steuer- und Versicherungsangelegenheiten"
+
+# ~~ Auswärtige Autohäuser
+# "Kfz Angelegenheiten für auswärtige Autohäuser"
+
+
+# ~ Mietspiegel - Überprüfung Mieterhöhung
+# ~~ Dienstleistungen des Amtes für Wohnen und Migration 
+# "Prüfung Mieterhöhung"
+
+
+# ~ Elternberatungsstelle
+# ~~ Alle Dienstleistungen
+# "Kurzberatung - Nachfrage zum Bearbeitungsstand"
+# "Umfassende Beratung - Wie bekomme ich einen Kita-Platz für mein Kind ?"
+
+
